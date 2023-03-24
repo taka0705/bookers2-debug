@@ -6,6 +6,7 @@
       <h2 class="mt-3">New book</h2>
       <%= render 'form', book: @new %>
     </div>
+
     <div class='col-md-8 offset-md-1'>
   		<h2>Book detail</h2>
   		<table class='table'>
@@ -26,9 +27,63 @@
               <% if @book.user == current_user %>
               <%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>
               <% end %>
+            </td>
+
+              <% if @book.favorited_by?(current_user) %>
+              <td>
+                <%= link_to book_favorites_path(@book),method: :delete do %>
+                  <p class="text-danger">♥<%= @book.favorites.count %></p>
+                <% end %>
               </td>
+               <% else %>
+              <td>
+                <%= link_to book_favorites_path(@book),method: :post do %>
+                  ♥<%= @book.favorites.count %>
+                <% end %>
+              </td>
+              <% end %>
+
+              <td>コメント数:<%= @book.book_comments.count %></td>
+
+             
+
+
+              </div>
+
+
         </tr>
       </table>
+
+      <table>
+       <% @book.book_comments.each do |book_comment| %>
+        <tr>
+
+
+          <td>
+          <%= image_tag book_comment.user.get_profile_image,size:'100x100' %><br/>
+          <%= link_to book_comment.user.name,user_path(book_comment.user) %>
+          </td>
+          <td>
+            <%= book_comment.comment %>
+            </td>
+            <td>
+            <% if book_comment.user == current_user %>
+              <%= link_to "Destroy", book_book_comment_path(book_comment.book, book_comment), method: :delete,class: "btn btn-danger" %>
+            <% end %>
+            </td>
+               </tr>
+          <% end %>
+
+          <!--上のテーブルを整えるのと削除ボタンをつける-->
+
+      </table>
+
+       <div>
+                <%= form_with model: [@book,@book_comment] do |f| %>
+                  <%= f.text_area :comment, rows: "5",cols: "100%" %>
+                 <div> <%= f.submit "送信" %></div>
+                <% end %>
+              </div>
+
     </div>
   </div>
-</div>
