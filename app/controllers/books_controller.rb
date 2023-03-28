@@ -5,9 +5,17 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @user = @book.user
     @book_comment = BookComment.new
+    @following_users = @user.following_user
+    @follower_users = @user.follower_user
+    # ↑2つは他の場所でも同じ定義をしているので無駄な記述をしないでいい方法があるかを確認
+
   end
 
   def index
+    @user = current_user
+    @following_users = @user.following_user
+    @follower_users = @user.follower_user
+    # ↑3つは他の場所でも同じ定義をしているので無駄な記述をしないでいい方法があるかを確認
     @book=Book.new
     @books = Book.all
   end
