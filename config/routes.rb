@@ -4,8 +4,12 @@ Rails.application.routes.draw do
   root to: "homes#top"
   get "home/about"=>"homes#about"
   get "search" => "searches#search"
-  
-  resources :groups,except: [:destroy]
+
+  resources :groups do
+    get "join" => "groups#join"
+    get "new/mail" => "groups#new_mail"
+    get "send/mail" => "groups#send_mail"
+  end
 
 
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do

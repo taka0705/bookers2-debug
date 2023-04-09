@@ -61,6 +61,21 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
+
+  config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings ={
+    port:          587,
+    address:       'smtp.gmail.com',
+    domain:        'gmail.com',
+    user_name:     'メアド',
+    password:      'アプリパスワード',
+    authentication: 'login',
+    enable_starttls_auto: true
+  }
+
+
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 

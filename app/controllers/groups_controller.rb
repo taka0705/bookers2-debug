@@ -9,6 +9,7 @@ class GroupsController < ApplicationController
     @user = current_user
     @following_users = @user.following_user
     @follower_users = @user.follower_user
+
   end
 
   def show
@@ -19,6 +20,13 @@ class GroupsController < ApplicationController
     @follower_users = @user.follower_user
   end
 
+  def join
+    @group = Group.find(params[:group_id])
+    # ↓の記述は@group.usersに、current_userを追加しているということ
+    @group.users << current_user
+    redirect_to groups_path
+  end
+
   def new
     @group = Group.new
   end
@@ -26,6 +34,7 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     @group.owner_id = current_user.id
+    @group.users << current_user
     if @group.save
       redirect_to groups_path
     else
@@ -43,6 +52,25 @@ class GroupsController < ApplicationController
       render "edit"
     end
   end
+
+  def destroy
+    @group = Group.find(params[:id])
+    # current_userは、@group.usersから消されるという記述
+    @group.users.delete(current_user)
+    redirect_to groups_path
+  end
+  
+  def new_mail
+    @group=Group.find(params[:group_id])
+  end
+  #↓ new_mail.htmlのform_withで入力された値を受け取っている。
+  def send_mail
+    @group = Group.find(params[:group_id])
+    group_users = @group.users
+    @mail_title = params[:mail_title]
+    @mail_content = params[:mail_content]
+    ContactMailer.send_mail(@mail_title,@mail_content,group_users).deliver
+  end  
 
   private
 
