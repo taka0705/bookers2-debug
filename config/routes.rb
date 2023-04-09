@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   root to: "homes#top"
   get "home/about"=>"homes#about"
   get "search" => "searches#search"
+  
+  resources :groups,except: [:destroy]
 
 
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do

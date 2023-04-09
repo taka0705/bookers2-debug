@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :books,dependent: :destroy
+  has_many :groups_users
+  # ↓userは,group_usersという中間テーブルを通じてgroupsにアクセスできるという
+  has_many :groups,through: :group_users
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
   has_many :follower,class_name: "Relationship",foreign_key: "follower_id",dependent: :destroy
