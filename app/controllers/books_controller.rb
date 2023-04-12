@@ -15,7 +15,7 @@ class BooksController < ApplicationController
     @user = current_user
     @following_users = @user.following_user
     @follower_users = @user.follower_user
-    # ↑3つは他の場所でも同じ定義をしているので無駄な記述をしないでいい方法があるかを確認
+    # ↑3つは他の場所でも同じ定義をしているので無駄な記述をしないでいい方法があるかを確認する
     @book=Book.new
     @books = Book.all
   end
