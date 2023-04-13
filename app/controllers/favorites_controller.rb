@@ -21,7 +21,7 @@ class FavoritesController < ApplicationController
 end
 
 # リダイレクト先を削除したことにより、
-# リダイレクト先がない、かつJavaScriptリクエストという状況になり、
+# リダイレクト先がないかつJavaScriptリクエストという状況になり、
 
 # createアクション実行後は、create.js.erbファイルを、
 # destroyアクション実行後はdestroy.js.erbファイルを探すようになります
