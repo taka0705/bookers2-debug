@@ -11,7 +11,6 @@ class UsersController < ApplicationController
 
   def index
     @user = current_user
-    # 現在ログインしているユーザ=current_user
     @following_users = @user.following_user
     @follower_users = @user.follower_user
     # この上二つを「そのユーザーがフォローした数とフォローされた数」に変えないとユーザー一覧でその数を引っ張ってこれないはず。
