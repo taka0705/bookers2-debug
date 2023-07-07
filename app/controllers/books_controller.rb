@@ -7,7 +7,6 @@ class BooksController < ApplicationController
     @book_comment = BookComment.new
     @following_users = @user.following_user
     @follower_users = @user.follower_user
-    # ↑2つは他の場所でも同じ定義をしているので無駄な記述をしないでいい方法があるかを確認
 
   end
 
