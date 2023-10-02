@@ -13,7 +13,6 @@ class UsersController < ApplicationController
     @user = current_user
     @following_users = @user.following_user
     @follower_users = @user.follower_user
-    # この上二つを「そのユーザーがフォローした数とフォローされた数」に変えないとユーザー一覧でその数を引っ張ってこれないはず。
     @users = User.all
     @book = Book.new
   end
@@ -45,7 +44,7 @@ class UsersController < ApplicationController
   def followers
     @user = User.find(params[:id])
     @follower_users = @user.follower_user
-    @users = User.all
+    @users = @user.follower_user.page(params[:page]).per(3).reverse_order
   end
 
   private
