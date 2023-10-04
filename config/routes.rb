@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     get "send/mail" => "groups#send_mail"
   end
 
+  resources :chats,only: [:show,:create]
 
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
      resource :favorites,only:[:create, :destroy]

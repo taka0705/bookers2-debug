@@ -4,6 +4,10 @@
       <h2>User info</h2>
       <%= render 'info',{user: @user,following_users: @following_users,follower_users: @follower_users} %>
 
+   <% if current_user != @user && current_user.following?(@user) &&  @user.following?(current_user) %>
+     <%= link_to 'chatを始める',chat_path(@user.id),class: "ml-3" %>
+   <% end %>
+
        <p class="d-flex justify-content-end">
    <% if current_user != @user %>
    <% if current_user.following?(@user) %>
