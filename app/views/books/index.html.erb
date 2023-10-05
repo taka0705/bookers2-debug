@@ -16,7 +16,7 @@
     </div>
     <div class='col-md-8 offset-md-1'>
       <h2>Books</h2>
-      
+
       <table class='table table-hover table-inverse'>
   <thead>
     <tr>
@@ -35,18 +35,18 @@
         </td>
         <td><%= link_to book.title,book %></td>
         <td><%= book.body %></td>
-         
+
          <td id="favorite_buttons_<%= book.id %>">
          <%= render 'favorites/favorite-btn', book: book %>
          </td>
-         
-               <td>コメント数:<%= book.book_comments.count %></td>
 
+               <td>コメント数:<%= book.book_comments.count %></td>
+               <td>閲覧数:<%= book.read_counts.count %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-      
+
     </div>
   </div>
 </div>
