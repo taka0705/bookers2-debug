@@ -26,6 +26,7 @@ class ChatsController < ApplicationController
   @chats = @room.chats
   # チャットの一覧用の変数
   @chat = Chat.new(room_id: @room.id)
+  # チャットの投稿用の変数
 end
 
 def create
